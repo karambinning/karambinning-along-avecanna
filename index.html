@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Along avec Anna — a yarn studio in Exeter</title>
+<meta name="description" content="Along avec Anna is a French-Devon yarn studio at 1 New Bridge Street, Exeter. Ethical mohair yarn, contemporary knitting patterns and workshops since 2017." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F4EFE6;
+    --paper-warm:#EDE3CF;
+    --sage:#A9B498;
+    --sage-deep:#5B6B53;
+    --madder:#A8593A;
+    --ink:#241D17;
+    --ink-soft:#4A3E33;
+    --rule:#D7CCB7;
+    --display:"Fraunces", "Iowan Old Style", Georgia, serif;
+    --body:"Newsreader", "Iowan Old Style", Georgia, serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:clamp(1rem, .6rem + 1vw, 1.18rem);
+    line-height:1.55;
+    font-feature-settings:"liga","kern","onum";
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(1px 1px at 18% 22%, rgba(36,29,23,.06) 50%, transparent 51%),
+      radial-gradient(1px 1px at 73% 64%, rgba(36,29,23,.05) 50%, transparent 51%),
+      radial-gradient(1px 1px at 41% 87%, rgba(36,29,23,.04) 50%, transparent 51%),
+      radial-gradient(1px 1px at 92% 11%, rgba(36,29,23,.06) 50%, transparent 51%);
+    background-size: 7px 7px, 11px 11px, 13px 13px, 9px 9px;
+    mix-blend-mode:multiply;
+    opacity:.55;
+    z-index:1;
+  }
+  main, header, footer{position:relative; z-index:2}
+
+  h1,h2,h3{ text-wrap:balance; font-family:var(--display); font-weight:500; letter-spacing:-0.015em; }
+  p{ text-wrap:pretty; hyphens:auto; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* ───── nav ───── */
+  .topbar{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:1rem;
+    padding:1.3rem clamp(1.2rem, 4vw, 3rem) 1rem;
+    font-family:var(--display);
+    font-size:.86rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+  }
+  .topbar .mark{ font-style:italic; font-weight:500; letter-spacing:0; text-transform:none; font-size:1.05rem; }
+  .topbar nav{ display:flex; gap:1.6rem; flex-wrap:wrap; }
+  .topbar nav a{
+    position:relative;
+    padding-bottom:2px;
+  }
+  .topbar nav a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0;
+    height:1px; background:var(--ink);
+    transition:right .35s ease;
+  }
+  .topbar nav a:hover::after{ right:0; }
+
+  /* ───── masthead ───── */
+  .masthead{
+    padding: clamp(2.4rem, 6vw, 5rem) clamp(1.2rem, 4vw, 3rem) clamp(1.2rem, 3vw, 2rem);
+    display:grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: clamp(1rem, 3vw, 2.2rem);
+  }
+  .masthead .eyebrow{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:clamp(.95rem, .6rem + .5vw, 1.15rem);
+    color:var(--ink-soft);
+    margin:0 0 .4rem;
+  }
+  .h-display{
+    font-family:var(--display);
+    font-size:clamp(3.6rem, 14vw, 13rem);
+    line-height:.88;
+    letter-spacing:-0.035em;
+    margin:0;
+    font-variation-settings:"opsz" 144, "wght" 500;
+  }
+  .h-display .avec{
+    font-style:italic;
+    font-weight:400;
+    font-variation-settings:"opsz" 144, "wght" 400;
+    color:var(--madder);
+    padding: 0 .04em;
+  }
+  .h-display .anna{
+    display:inline-block;
+    border-bottom:.06em solid var(--ink);
+    padding-bottom:.02em;
+  }
+  .masthead .lockup{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:1.5rem; flex-wrap:wrap;
+    margin-top: clamp(.6rem, 2vw, 1.4rem);
+    padding-top:1.2rem;
+    border-top:1px solid var(--rule);
+  }
+  .masthead .meta{
+    font-family:var(--display);
+    font-size:.86rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+  .masthead .standfirst{
+    font-family:var(--body);
+    font-size: clamp(1.1rem, .8rem + .8vw, 1.55rem);
+    line-height:1.4;
+    max-width: 32ch;
+    margin:0;
+    font-style:italic;
+    color:var(--ink);
+  }
+  .masthead .standfirst em{ font-style:normal; color:var(--madder); }
+
+  /* ───── marquee strip ───── */
+  .strip{
+    overflow:hidden;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    background:var(--paper-warm);
+    --speed:55s;
+  }
+  .strip__track{
+    display:inline-flex;
+    gap:3rem;
+    padding:1.05rem 0;
+    white-space:nowrap;
+    animation: drift var(--speed) linear infinite;
+    font-family:var(--display);
+    font-size:clamp(1rem, .7rem + .7vw, 1.45rem);
+    color:var(--ink);
+  }
+  .strip__track span{ display:inline-flex; align-items:center; gap:3rem; }
+  .strip__track span::after{
+    content:"✺";
+    color:var(--madder);
+    font-size:.9em;
+  }
+  @keyframes drift { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){
+    .strip__track{ animation:none; }
+  }
+
+  /* ───── section base ───── */
+  section{
+    padding: clamp(3rem, 7vw, 6rem) clamp(1.2rem, 4vw, 3rem);
+  }
+  .wrap{ max-width:1180px; margin:0 auto; }
+  .section-label{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.95rem;
+    letter-spacing:.02em;
+    color:var(--ink-soft);
+    margin:0 0 1.4rem;
+    display:flex; align-items:center; gap:.8rem;
+  }
+  .section-label::before{
+    content:""; width:2.4rem; height:1px; background:currentColor;
+  }
+  .h-section{
+    font-size: clamp(2rem, 4.5vw, 4.4rem);
+    line-height:1;
+    margin:0 0 1.8rem;
+    font-variation-settings:"opsz" 100, "wght" 500;
+  }
+
+  /* ───── intro slab ───── */
+  .intro .cols{
+    display:grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items:start;
+  }
+  .intro p{ font-size:clamp(1.1rem, .85rem + .6vw, 1.35rem); line-height:1.5; max-width:48ch; }
+  .intro p + p{ margin-top:1.1rem; }
+  .signoff{
+    font-family:var(--display);
+    font-style:italic;
+    color:var(--madder);
+    font-size:1.1em;
+    margin-top:1.6rem;
+    display:block;
+  }
+  @media (min-width:880px){
+    .intro .cols{ grid-template-columns: 1.1fr 1fr; }
+  }
+
+  /* ───── what we make ───── */
+  .make{ background:var(--sage); color:#1F2A1C; }
+  .make .section-label{ color:#1F2A1C; }
+  .make .h-section{ color:#1A2515; }
+  .make-list{
+    list-style:none; padding:0; margin: 1.8rem 0 0;
+    display:flex; flex-direction:column;
+    border-top:1px solid rgba(31,42,28,.35);
+  }
+  .make-item{
+    display:grid;
+    grid-template-columns: 4ch 1fr auto;
+    align-items:baseline;
+    gap:1.2rem;
+    padding: 1.3rem 0 1.4rem;
+    border-bottom:1px solid rgba(31,42,28,.35);
+  }
+  .make-item .num{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.95rem;
+    color:#3a4a32;
+    letter-spacing:.04em;
+  }
+  .make-item h3{
+    margin:0;
+    font-family:var(--display);
+    font-size:clamp(1.5rem, 1rem + 1.5vw, 2.6rem);
+    line-height:1.05;
+    font-variation-settings:"opsz" 80, "wght" 500;
+    font-weight:500;
+  }
+  .make-item p{
+    grid-column: 2 / 3;
+    margin:.4rem 0 0;
+    max-width:52ch;
+    font-size:1.02rem;
+    color:#26321F;
+  }
+  .make-item .tag{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.95rem;
+    color:#3a4a32;
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+
+  /* ───── yarn / ethics ───── */
+  .yarn .cols{
+    display:grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  @media(min-width:880px){
+    .yarn .cols{ grid-template-columns: .9fr 1.1fr; }
+  }
+  .yarn .pullquote{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:clamp(1.6rem, 1rem + 2vw, 2.6rem);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+  .yarn .pullquote::before{
+    content:"“";
+    display:block;
+    font-size:3em;
+    line-height:.6;
+    color:var(--madder);
+    margin-bottom:.3rem;
+  }
+  .yarn ul{
+    list-style:none; padding:0; margin:0;
+    display:flex; flex-direction:column;
+  }
+  .yarn li{
+    padding:1.05rem 0;
+    border-bottom:1px dashed var(--rule);
+    display:flex; gap:1.2rem; align-items:baseline;
+  }
+  .yarn li:first-child{ border-top:1px dashed var(--rule); }
+  .yarn li .k{
+    font-family:var(--display);
+    font-style:italic;
+    color:var(--sage-deep);
+    min-width: 8ch;
+    font-size:.95rem;
+    letter-spacing:.04em;
+  }
+  .yarn li .v{ font-size:1.05rem; }
+
+  /* ───── workshops slab ───── */
+  .workshops{ background:var(--ink); color:var(--paper); }
+  .workshops .section-label{ color:#C6B89A; }
+  .workshops .h-section{ color:var(--paper); }
+  .workshops p{ max-width:48ch; font-size:clamp(1.05rem, .8rem + .6vw, 1.25rem); }
+  .workshop-grid{
+    margin-top: 2rem;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+    border-top:1px solid rgba(244,239,230,.18);
+  }
+  .workshop-card{
+    padding: 1.6rem 0 0;
+    border-right:1px solid rgba(244,239,230,.18);
+    padding-right:1.2rem;
+  }
+  .workshop-card:last-child{ border-right:none; }
+  .workshop-card h4{
+    margin:.2rem 0 .5rem;
+    font-family:var(--display);
+    font-size:1.45rem;
+    font-weight:500;
+    line-height:1.1;
+  }
+  .workshop-card .pill{
+    display:inline-block;
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.85rem;
+    letter-spacing:.06em;
+    color:var(--madder);
+    background:rgba(168,89,58,.13);
+    padding:.15rem .55rem;
+    border:1px solid rgba(168,89,58,.4);
+  }
+  .workshop-card p{ font-size:.98rem; color:#D9CFBF; max-width:100%; margin:.6rem 0 0; }
+
+  /* ───── find us / contact ───── */
+  .find{ background:var(--paper-warm); }
+  .find .cols{
+    display:grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items:start;
+  }
+  @media(min-width:880px){
+    .find .cols{ grid-template-columns: 1.2fr .8fr; }
+  }
+  .address{
+    font-family:var(--display);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height:1.05;
+    margin:0;
+    font-variation-settings:"opsz" 80, "wght" 500;
+  }
+  .address .line{ display:block; }
+  .address .line.small{
+    font-size:.55em; font-style:italic; color:var(--ink-soft);
+    letter-spacing:.02em;
+    margin-top:.6rem;
+  }
+  .find .hours{
+    margin-top:2rem;
+    border-top:1px solid var(--rule);
+    padding-top:1.4rem;
+    font-family:var(--display);
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+  }
+  .map-link{
+    display:inline-flex; align-items:center; gap:.6rem;
+    margin-top:1.4rem;
+    padding:.85rem 1.2rem;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--display);
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-size:.86rem;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .map-link:hover{ background:var(--madder); transform: translateY(-1px); }
+  .map-link::after{ content:"↗"; }
+
+  /* ───── footer / letterhead ───── */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding: clamp(3rem, 6vw, 5rem) clamp(1.2rem, 4vw, 3rem) 2rem;
+  }
+  footer .wrap{
+    display:grid;
+    grid-template-columns: minmax(0,1fr);
+    gap:2rem;
+    align-items:end;
+  }
+  @media(min-width:880px){
+    footer .wrap{ grid-template-columns: 1.4fr 1fr; }
+  }
+  .footer-mark{
+    font-family:var(--display);
+    font-size:clamp(2.5rem, 6vw, 5rem);
+    line-height:.95;
+    margin:0;
+    letter-spacing:-0.02em;
+    font-variation-settings:"opsz" 144, "wght" 500;
+  }
+  .footer-mark .avec{ font-style:italic; color:#D8A88E; font-weight:400; }
+  .footer-meta{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:1rem;
+    line-height:1.7;
+    color:#C6B89A;
+  }
+  .footer-meta a{ border-bottom:1px solid currentColor; }
+  .footer-bottom{
+    margin-top:3rem;
+    padding-top:1.5rem;
+    border-top:1px solid rgba(244,239,230,.18);
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:1rem; flex-wrap:wrap;
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.85rem;
+    color:#9B8C75;
+  }
+
+  /* scroll reveal */
+  @supports (animation-timeline: view()){
+    .reveal{
+      animation: rise both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 35%;
+    }
+    @keyframes rise{
+      from{ opacity:0; transform: translateY(1.6rem); }
+      to  { opacity:1; transform: translateY(0); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ animation:none; }
+  }
+
+  /* tiny screens */
+  @media (max-width:520px){
+    .topbar{ flex-direction:column; align-items:flex-start; gap:.6rem; }
+    .make-item{ grid-template-columns: 3ch 1fr; }
+    .make-item .tag{ grid-column: 2 / 3; margin-top:.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="mark"><em>Along</em> avec <em>Anna</em></span>
+  <nav aria-label="Primary">
+    <a href="#what-we-make">Shop</a>
+    <a href="#yarn">The yarn</a>
+    <a href="#workshops">Workshops</a>
+    <a href="#find">Visit</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="masthead" aria-labelledby="hero-title">
+    <p class="eyebrow">A yarn studio in Exeter — est. 2017</p>
+    <h1 id="hero-title" class="h-display">
+      Along<br />
+      <span class="avec">avec</span><br />
+      <span class="anna">Anna.</span>
+    </h1>
+    <div class="lockup">
+      <p class="standfirst">
+        Timeless knitting patterns and <em>beautiful ethical yarn</em>, made in Devon since 2017 — for anyone who loves to knit as much as we do.
+      </p>
+      <p class="meta">
+        Vol. IX<br />
+        1 New Bridge St<br />
+        Exeter · EX4&nbsp;3JW
+      </p>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="strip__track">
+      <span>Mulesing-free South African mohair</span>
+      <span>Certified cruelty-free silk</span>
+      <span>Hand-dyed in small batches</span>
+      <span>Patterns for the modern knitter</span>
+      <span>Workshops every week in Exeter</span>
+      <span>Worldwide delivery · Click &amp; collect</span>
+      <span>Mulesing-free South African mohair</span>
+      <span>Certified cruelty-free silk</span>
+      <span>Hand-dyed in small batches</span>
+      <span>Patterns for the modern knitter</span>
+      <span>Workshops every week in Exeter</span>
+      <span>Worldwide delivery · Click &amp; collect</span>
+    </div>
+  </div>
+
+  <section class="intro reveal">
+    <div class="wrap cols">
+      <div>
+        <p class="section-label">A note from Anna</p>
+        <h2 class="h-section">Slow craft, started in 2013 on a rainy afternoon in Devon.</h2>
+      </div>
+      <div>
+        <p>
+          What began as a blog — a small French voice writing about knitting from her new home in England — is now a studio, a yarn range, and a shop on New Bridge Street in Exeter, where we open the doors most days of the week.
+        </p>
+        <p>
+          We make patterns we want to knit ourselves. We choose yarns from spinning mills who treat the people, the animals and the land as carefully as we treat the wool itself. Nothing is rushed. Most things take a season to make properly. We like it that way.
+        </p>
+        <span class="signoff">— Anna</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="make reveal" id="what-we-make">
+    <div class="wrap">
+      <p class="section-label">What we make</p>
+      <h2 class="h-section">Five things, made slowly.</h2>
+      <ol class="make-list">
+        <li class="make-item">
+          <span class="num">01 ·</span>
+          <h3>House Yarn</h3>
+          <span class="tag">Mohair · Silk · Wool</span>
+          <p>Our own hand-dyed bases — mulesing-free South African mohair, certified cruelty-free silk, fine wool blends. Spun by mills we know by name.</p>
+        </li>
+        <li class="make-item">
+          <span class="num">02 ·</span>
+          <h3>Knitting Patterns</h3>
+          <span class="tag">PDF &amp; printed</span>
+          <p>Delicate, modern patterns for women and children. Written for clarity at every level — first cardigan through to your tenth.</p>
+        </li>
+        <li class="make-item">
+          <span class="num">03 ·</span>
+          <h3>Knit Kits</h3>
+          <span class="tag">A whole project</span>
+          <p>Everything for a single project, parcelled up: the yarn, the pattern, the right needles, a note on what to expect. A good gift for a knitter you love.</p>
+        </li>
+        <li class="make-item">
+          <span class="num">04 ·</span>
+          <h3>Needles &amp; Notions</h3>
+          <span class="tag">The good stuff</span>
+          <p>A small, considered range of needles, hooks, stitch markers and project bags chosen by the people who use them every day.</p>
+        </li>
+        <li class="make-item">
+          <span class="num">05 ·</span>
+          <h3>Workshops</h3>
+          <span class="tag">At the shop</span>
+          <p>Beginners through to lace and colourwork, plus stitch-along evenings. Small groups, real tea, plenty of time to ask questions.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="yarn reveal" id="yarn">
+    <div class="wrap cols">
+      <div>
+        <p class="section-label">The yarn</p>
+        <h2 class="h-section">Where it comes from, who made it, why it matters.</h2>
+        <p class="pullquote">
+          We work with spinning mills that respect animals, humans, and the land they share — every base we sell is fully traceable.
+        </p>
+      </div>
+      <div>
+        <ul>
+          <li><span class="k">Origin</span><span class="v">South African mohair from farms where mulesing is not practiced.</span></li>
+          <li><span class="k">Silk base</span><span class="v">Certified cruelty-free (peace silk) — no boiled cocoons.</span></li>
+          <li><span class="k">Wool</span><span class="v">Selected blends from spinning mills working to ethical and environmental guidelines.</span></li>
+          <li><span class="k">Dye</span><span class="v">Hand-dyed in small batches at the studio — colours vary slightly from skein to skein, on purpose.</span></li>
+          <li><span class="k">Quantities</span><span class="v">We make only what we can sell. When a colourway sells out, we dye another bath rather than over-print.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="workshops reveal" id="workshops">
+    <div class="wrap">
+      <p class="section-label">Workshops in Exeter</p>
+      <h2 class="h-section">Learn slowly, in a room full of yarn.</h2>
+      <p>
+        Most weeks we open the shop for small workshops and stitch evenings. A few seats per session — bring your own project, or borrow one of ours.
+      </p>
+      <div class="workshop-grid">
+        <div class="workshop-card">
+          <span class="pill">For beginners</span>
+          <h4>Your first cardigan</h4>
+          <p>From casting on to seaming a sleeve, across two unhurried sessions.</p>
+        </div>
+        <div class="workshop-card">
+          <span class="pill">Intermediate</span>
+          <h4>Colourwork &amp; charts</h4>
+          <p>Reading a chart, holding two yarns, tensioning without panic.</p>
+        </div>
+        <div class="workshop-card">
+          <span class="pill">Open evenings</span>
+          <h4>Stitch &amp; tea</h4>
+          <p>Bring whatever you're stuck on. We'll put the kettle on.</p>
+        </div>
+        <div class="workshop-card">
+          <span class="pill">Private</span>
+          <h4>One-to-one</h4>
+          <p>An afternoon with Anna to unpick a project or plan a new one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="find reveal" id="find">
+    <div class="wrap cols">
+      <div>
+        <p class="section-label">Find us</p>
+        <h3 class="address">
+          <span class="line">1 New Bridge Street,</span>
+          <span class="line">Exeter, <em>EX4&nbsp;3JW</em>.</span>
+          <span class="line small">Devon · United Kingdom</span>
+        </h3>
+        <a class="map-link" href="https://maps.google.com/?q=1+New+Bridge+Street+Exeter+EX4+3JW" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+      <div>
+        <p class="section-label">Opening hours</p>
+        <p class="hours">
+          Most weekdays &amp; Saturdays — please check the shop window or our social pages for this week's hours before travelling far. Workshops run by appointment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2 class="footer-mark">
+      Along<br /><span class="avec">avec</span> Anna.
+    </h2>
+    <div class="footer-meta">
+      1 New Bridge Street<br />
+      Exeter · EX4&nbsp;3JW<br />
+      Devon · United Kingdom<br /><br />
+      <a href="#what-we-make">Shop</a> · <a href="#workshops">Workshops</a> · <a href="#find">Visit</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>Along avec Anna Ltd · Established 2017</span>
+    <span>A yarn studio in Devon.</span>
+  </div>
+</footer>
+
+</body>
+</html>
